@@ -1,0 +1,27 @@
+{
+  "name": "OnlineShop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src",
+    "dev": "nodemon src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joaquin-Parrilla/OnlineShop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joaquin-Parrilla/OnlineShop/issues"
+  },
+  "homepage": "https://github.com/Joaquin-Parrilla/OnlineShop#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.5",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7"
+  }
+}
