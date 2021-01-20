@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 router.get("/", function(request, response) {
     //res.json({ project: "OnlineShop" });
-    res.render("index.html");
+    response.render("index.html", { title: "Home - Online Shop v1.0" });
 });
 
 module.exports = router;
