@@ -7,4 +7,5 @@ npm i nodemon
 npm i mysql
 npm i ejs
 npm i body-parser
+npm i dotenv
 

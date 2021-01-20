@@ -1,5 +1,5 @@
 
-const express = require("express");
+const express = require("express")
 const app = express();
 const server = require("http").createServer(app);
 // const options = {};
@@ -14,11 +14,9 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
 
 // mysql connection:
-
-// mysql code here...
+require("./controllers/ControllerDB");
 
 // sockets:
-
 // sockets code here...
 
 // middlewares:
