@@ -25,10 +25,12 @@ btnLogin.addEventListener("click", async function(event) {
 
             if (response.ok) {
                 // show html ...
+
+                // programar ...
+
                 console.log("ok");
             } else {
-                console.log(response.data);
-                
+                showErrorAlert(response.statusText);                
                 throw new Error(response.statusText);
             }
 
@@ -37,11 +39,27 @@ btnLogin.addEventListener("click", async function(event) {
         }
 
     } else {
-        // data missing
+        showErrorAlert("Error: Debe indicar su usuario y contraseña");
         console.error("Data missing: username/password");
     }
 
 });
+
+function showErrorAlert(errorText) {
+
+    const errorAlert = document.getElementById("errorLogin");
+    // primero, elimino los childs del errorAlert en caso de tenerlos:
+    if (errorAlert.firstChild) { 
+        errorAlert.removeChild(errorAlert.firstChild);
+    }
+    // luego, agrego el nuevo child:
+    errorAlert.appendChild(document.createTextNode(errorText));
+    errorAlert.style.display = "block";  // hacemos visible
+
+    setTimeout(() => {
+        errorAlert.style.display = "none";  // luego de 5 seg, hacemos invisible
+    }, 5000);
+}
 
 // check show-password event:
 const checkShowPassword = document.getElementById("checkShowPassword");

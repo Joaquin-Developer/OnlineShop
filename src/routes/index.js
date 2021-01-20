@@ -14,8 +14,9 @@ router.get("/login", function(req, res) {
 });
 
 router.post("/login-autentication", function(req, res) {
-
+    // example
     res.status(500).send("ERROR DE LOGIN");
+    // res.send("ok");
 
 });
 
