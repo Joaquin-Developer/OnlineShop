@@ -7,9 +7,9 @@
     <%- include("partials/nav.html") %>
     <br>
     <div class="container">
+        <div id="errorLogin" class="alert alert-danger" role="alert"></div>
         <div class="formLogin">
             <h2>Login</h2>
-            <div id="errorLogin" class="alert alert-danger" role="alert"></div>
             <form class="row g-3">
                 <div class="col-auto">
                     <input type="text" id="inputUsername" class="form-control" placeholder="Nombre de usuario">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Código de verificación enviado a su correo" aria-describedby="button-addon2">
+                        <input id="verification_code" type="text" class="form-control" placeholder="Código de verificación enviado a su correo" aria-describedby="button-addon2">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Solicitar código</button>
                     </div>
                 </div><br>
@@ -78,5 +78,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="/js/Login.js"></script><!-- JavaScript functions -->
+    <script src="/js/Front_RegisterUser.js"></script>
 </body>
 </html>
