@@ -21,9 +21,31 @@ document.querySelector("#btnRegisterUser").addEventListener("click", function(ev
         && emailElem.value && dirElem.value && verificationCodeElem.value && userNameElem.value && passwElem.value)
     {
         // valid/not-missing data:
-
-        
         alert("ok");
+        // fetch request try-catch...
+
+        const request = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: firstNameElem.value,
+                secondName: secondNameElem.value,
+                firstSurname: firstSurnameElem.value,
+                secondSurname: secondSurnameElem.value,
+                email: emailElem.value,
+                dir: dirElem.value,
+                username: userNameElem.value,
+                password: passwElem.value,
+                verificationCode: verificationCodeElem.value
+            })
+        };
+
+        // fetch ...
+        
+        
+        
     } else {
         // if missing data:
         showErrorAlert("Error: Faltan datos y/o hay datos inválidos");    // function from Login.js
