@@ -21,6 +21,12 @@ btnLogin.addEventListener("click", async function(event) {
                 },
                 body: JSON.stringify(data)
             };
+
+            // fetch("")
+            //     .then()
+            //     .catch();
+
+
             let response = await fetch("/login-autentication", request);
 
             if (response.ok) {
@@ -64,10 +70,37 @@ function showErrorAlert(errorText) {
 // check show-password event:
 const checkShowPassword = document.getElementById("checkShowPassword");
 
-checkShowPassword.addEventListener("change", function() {
+checkShowPassword.addEventListener("change", () => {
     if (checkShowPassword.checked)
         inputPassword.type = "text";
     else
         inputPassword.type = "password";
 });
 
+// Show form create user:
+document.getElementById("createUser").addEventListener("click", (event) => {
+    
+    event.preventDefault();
+    ocultLoginForm();
+    // change title:
+    const showFormElem = document.querySelector(".showFormRegisterUser")
+    // remove childs:
+    while (showFormElem.firstChild) {
+        showFormElem.removeChild(showFormElem.firstChild);
+    }
+    let h2Elem  = document.createElement("H2");
+    h2Elem.appendChild(document.createTextNode("Registro de Usuario:"));
+    showFormElem.appendChild(h2Elem);
+    
+    showCreareUserForm();
+});
+
+function ocultLoginForm() {
+    document.querySelector(".formLogin").classList.add("none");
+}
+
+function showCreareUserForm() {
+    const form = document.getElementById("formCreateUser");
+    form.classList.remove("none");
+    form.classList.add("block");
+}

@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
 <head>
     <%- include("partials/head.html") %>
     <title><%= title %></title>
@@ -7,28 +7,76 @@
     <%- include("partials/nav.html") %>
     <br>
     <div class="container">
-        <h2>Login</h2>
-        <div id="errorLogin" class="alert alert-danger" role="alert"></div>
-        <form class="row g-3">
-            <div class="col-auto">
-                <label for="staticEmail2" class="visually-hidden">Email</label>
-                <input type="text" id="inputUsername" class="form-control" placeholder="Nombre de usuario">
+        <div class="formLogin">
+            <h2>Login</h2>
+            <div id="errorLogin" class="alert alert-danger" role="alert"></div>
+            <form class="row g-3">
+                <div class="col-auto">
+                    <input type="text" id="inputUsername" class="form-control" placeholder="Nombre de usuario">
+                </div>
+                <div class="col-auto">
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkShowPassword">
+                    <label class="form-check-label" for="checkShowPassword">Mostrar Contraseña</label>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" id="btnLogin" class="btn btn-primary mb-3">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="showFormRegisterUser">
+            <p>¿No tienes una cuenta? Puedes <a id="createUser" href="">registrarte aquí</a></p>    
+        </div>
+        <form id="formCreateUser" class="none">
+            <div class="row">
+                <label for="row" class="form-label">Datos de inicio de sesión:</label>
+                <div class="col">
+                    <input id="txtNewUsername" type="text" class="form-control" placeholder="Nombre de Usuario">
+                </div>
+                <div class="col">
+                    <input type="password" id="txtNewPassword" class="form-control" placeholder="Contraseña">
+                </div>
+            </div><br>
+            <div class="row">
+                <label for="row" class="form-label">Datos personales:</label>
+                <div class="col">
+                    <input id="first_name" type="text" class="form-control" placeholder="Primer nombre">
+                </div>
+                <div class="col">
+                    <input id="second_name" type="text" class="form-control" placeholder="Segundo nombre">
+                </div>
+                <div class="col">
+                    <input id="first_surname" type="text" class="form-control" placeholder="Primer apellido">
+                </div>
+                <div class="col">
+                    <input id="second_surname" type="text" class="form-control" placeholder="Segundo apellido">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <input id="dir" type="text" class="form-control" placeholder="Dirección donde vive">
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <input id="email" type="email" class="form-control" placeholder="Dirección de correo electrónico">
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Código de verificación enviado a su correo" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Solicitar código</button>
+                    </div>
+                </div><br>
             </div>
-            <div class="col-auto">
-                <label for="inputPassword2" class="visually-hidden">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña">
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkShowPassword">
-                <label class="form-check-label" for="checkShowPassword">Mostrar Contraseña</label>
-            </div>
-            <div class="col-auto">
-                <button type="submit" id="btnLogin" class="btn btn-primary mb-3">Iniciar Sesión</button>
+            <div class="d-grid gap-2">
+                <button id="btnRegisterUser" class="btn btn-primary" type="submit">Registrarse</button>
             </div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <!-- JavaScript functions -->
-    <script src="/js/Login.js"></script>
+    <script src="/js/Login.js"></script><!-- JavaScript functions -->
 </body>
 </html>

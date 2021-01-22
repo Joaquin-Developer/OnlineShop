@@ -14,7 +14,7 @@ app.engine("html", require("ejs").renderFile);
 app.set("view engine", "ejs");
 
 // mysql connection:
-require("./controllers/ControllerDB");
+// require("./controllers/ControllerDB");
 
 // sockets:
 // sockets code here...
