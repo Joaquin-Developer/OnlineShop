@@ -2,8 +2,8 @@
 const express = require("express")
 const app = express();
 const server = require("http").createServer(app);
-// const options = {};
-// const io = require("socket.io")(server, options);
+const options = {};
+const io = require("socket.io")(server, options);
 const path = require("path");
 const bodyParser = require("body-parser");
 
@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 // require("./controllers/ControllerDB");
 
 // sockets:
-// sockets code here...
+require("./sockets.js")(io);
 
 // middlewares:
 app.use(bodyParser.urlencoded({ extended: true }));

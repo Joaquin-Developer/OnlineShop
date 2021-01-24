@@ -8,4 +8,6 @@ npm i mysql
 npm i ejs
 npm i body-parser
 npm i dotenv
+npm i nodemailer
+npm i nodemailer-smtp-transport
 
