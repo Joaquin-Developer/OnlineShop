@@ -1,3 +1,4 @@
+
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 require("dotenv").config();
@@ -12,30 +13,43 @@ module.exports = function(io) {
             const code = createVerificationCode();
             // send mail
             sendEmail(mail, code);
-
             // save code-verification:
             allCodes.push({
                 code: code,
                 mail: mail,
-                id: socket.id
+                socketid: socket.id
             });
+        });
+
+        socket.on("verify-verification-code", (mail, code) => {
+
+            if (verifyVerificationCode(code, mail)) {
+                status = true; // the state is successful
+                emitVerificationMessage(code, mail, socket.id, status);
+            } else {
+                emitVerificationMessage(code, mail, socket.id, false);
+            }
 
         });
 
     });
 
-} // end module.exports
+    function emitVerificationMessage(code,mail, socketid, status) {
+        io.sockets.socket(socketid).emit("verification-message", { mail: mail, status: status });
+    }
+
+
+}
 
 // CODE AND EMAIL LOGIC:
 
-// todos los códigos de verificación sin remitir
+// all verification codes:
 let allCodes = [];
 
 function createVerificationCode() {
-    // creo un numero random de 6 digitos y lo retorno:
     let code;
     do {
-        code = Math.round(Math.random() * 999999);
+        code = Math.round(Math.random() * 999999);  // 6 digits
     } while(searchCodeInArray(code) === false);
 
     return code;
@@ -51,6 +65,13 @@ function searchCodeInArray(code) {
 
     for (const elem of allCodes) {
         if (elem.code === code) return true;
+    }
+    return false;
+}
+
+function verifyVerificationCode(code, mail) {
+    for (const elem of allCodes) {
+        if (elem.code === code && elem.mail === mail) return true;
     }
     return false;
 }
@@ -72,7 +93,7 @@ function sendEmail(to, code) {
         to: to,
         subject: "Verification code - OnlineShop",
         text: "The verification code from OnlineShop account is: " + code //, plain text body
-        // html: "<b>Hello world?</b>", // html body
+        // html: "<b>Hello world?</b>", // html body (example)
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
