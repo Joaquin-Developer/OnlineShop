@@ -14,16 +14,6 @@ require("dotenv").config();
         }
     }));
 
-    // let transporter = nodemailer.createTransport({
-    //     //host: "smtp.gmail.com",
-    //     //port: 465,
-    //     //secure: true, // true for 465, false for other ports
-    //     service: "gmail",
-    //     auth: {
-    //         user: "joaquin77j@gmail.com", // process.env.SEND_EMAIL_MAIL,
-    //         pass: "jparrilla77j" // process.env.SEND_EMAIL_PASSWORD
-    //     }
-    // });
 
     const mailOptions = {
         from: "joaquin77j@gmail.com", //process.env.SEND_EMAIL_MAIL, // sender address

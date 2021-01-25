@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 // require("./controllers/ControllerDB");
 
 // sockets:
-require("./sockets.js")(io);
+// require("./sockets.js")(io);
 
 // middlewares:
 app.use(bodyParser.urlencoded({ extended: true }));
