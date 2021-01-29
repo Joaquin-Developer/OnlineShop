@@ -7,18 +7,25 @@ module.exports = function(io) {
 
     io.on("connection", async (socket) => {
 
-        socket.on("request-verification-code", (mail) => {
-            console.log(socket.id + " requirió un código de verificación para registro");
+        socket.on("request-verification-code", (mail, cb) => {
             
-            const code = createVerificationCode();
-            // send mail
-            sendEmail(mail, code);
-            // save code-verification:
-            allCodes.push({
-                code: code,
-                mail: mail,
-                socketid: socket.id
-            });
+            if (searchMailInArray(mail)) {
+                cb(false);
+                console.log(`${socket.id} intentó requerir nuevamente un código de verif. para registro`);
+            } else {
+                cb(true);
+                // mail not missing in array:
+                console.log(`${socket.id} requirió un código de verificación para registro`);
+                const code = createVerificationCode();
+                // send mail
+                sendEmail(mail, code);
+                // save code-verification:
+                allCodes.push({
+                    code: code,
+                    mail: mail,
+                    socketid: socket.id
+                });
+            }
         });
 
         socket.on("verify-verification-code", (mail, code) => {
@@ -47,12 +54,25 @@ module.exports = function(io) {
 let allCodes = [];
 
 function createVerificationCode() {
-    let code;
+    let code = null;
     do {
         code = Math.round(Math.random() * 999999);  // 6 digits
     } while(searchCodeInArray(code) === false);
 
     return code;
+}
+
+/**
+ * Optimizar las dos funciones de abajo:
+ * podrían ser una sola función, y mas óptima :)
+ */
+
+function searchMailInArray(mail) {
+    if (allCodes.length === 0) return false;
+    for (const elem of allCodes) {
+        if (elem.mail === mail) return true;
+    }
+    return false;
 }
 
 function searchCodeInArray(code) {

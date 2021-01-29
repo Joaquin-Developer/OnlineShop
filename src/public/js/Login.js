@@ -92,15 +92,16 @@ document.getElementById("createUser").addEventListener("click", (event) => {
     h2Elem.appendChild(document.createTextNode("Registro de Usuario:"));
     showFormElem.appendChild(h2Elem);
     
-    showCreareUserForm();
+    showCreateUserForm();
 });
 
 function ocultLoginForm() {
     document.querySelector(".formLogin").classList.add("none");
 }
 
-function showCreareUserForm() {
+function showCreateUserForm() {
     const form = document.getElementById("formCreateUser");
     form.classList.remove("none");
     form.classList.add("block");
 }
+

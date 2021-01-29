@@ -9,8 +9,15 @@ const secondSurnameElem = document.querySelector("#second_surname");
 const emailElem = document.querySelector("#email");
 const dirElem = document.querySelector("#dir");
 const verificationCodeElem = document.querySelector("#verification_code");
+const btnVerificationCode = document.getElementById("btnVerificationCode");
 const userNameElem = document.querySelector("#txtNewUsername");
 const passwElem = document.querySelector("#txtNewPassword");
+
+const socket = io();
+
+addEventListener("load", () => {
+    btnVerificationCode.addEventListener("click", requestVerificationCode);
+});
 
 document.querySelector("#btnRegisterUser").addEventListener("click", function(event) {
 
@@ -69,3 +76,35 @@ function validString(text) {
     return true;
 }
 
+// verification code functions:
+
+// this function is added in eventListener from btnVerificationCode
+function requestVerificationCode(event) {
+    event.preventDefault();
+    if (! emailElem.value) { 
+        showErrorAlert("Error: Debe ingresar un email");    // function from Login.js
+        return;
+    }
+    socket.emit("request-verification-code", emailElem.value, (data) => {
+        if (data) {
+            // ok
+
+            // then, remove the event and add event for verify-code
+            btnVerificationCode.removeEventListener("click", requestVerificationCode);
+            btnVerificationCode.addEventListener("click", verifyCode);
+            // set text of button:
+            btnVerificationCode.lastChild.remove();
+            btnVerificationCode.appendChild(document.createTextNode("Verificar código"));
+            // set input:
+            document.querySelector("#verification_code").placeholder = "Ingrese código obtenido";
+
+        } else {
+            showErrorAlert("Se produjo un error al solicitar un código de verificación.");
+        }
+    });
+
+}
+
+function verifyCode(event) {
+    event.preventDefault();
+}
