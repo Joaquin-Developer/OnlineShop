@@ -17,6 +17,7 @@ const socket = io();
 
 addEventListener("load", () => {
     btnVerificationCode.addEventListener("click", requestVerificationCode);
+    verificationCodeElem.disabled = true;
 });
 
 document.querySelector("#btnRegisterUser").addEventListener("click", function(event) {
@@ -82,22 +83,18 @@ function validString(text) {
 function requestVerificationCode(event) {
     event.preventDefault();
     if (! emailElem.value) { 
-        showErrorAlert("Error: Debe ingresar un email");    // function from Login.js
+        showErrorAlert("Error: Debe ingresar un email");    // function from Login.js file
         return;
     }
     socket.emit("request-verification-code", emailElem.value, (data) => {
         if (data) {
-            // ok
-
-            // then, remove the event and add event for verify-code
+            console.log("Request verification code ok");
+            // then, remove the event and add event for verify-code and set visbility:
             btnVerificationCode.removeEventListener("click", requestVerificationCode);
-            btnVerificationCode.addEventListener("click", verifyCode);
-            // set text of button:
-            btnVerificationCode.lastChild.remove();
-            btnVerificationCode.appendChild(document.createTextNode("Verificar código"));
+            btnVerificationCode.style.visibility = "hidden";
             // set input:
             document.querySelector("#verification_code").placeholder = "Ingrese código obtenido";
-
+            verificationCodeElem.disabled = false;
         } else {
             showErrorAlert("Se produjo un error al solicitar un código de verificación.");
         }
@@ -105,6 +102,22 @@ function requestVerificationCode(event) {
 
 }
 
-function verifyCode(event) {
+async function post_requestVerificationCode(event) {
+
     event.preventDefault();
+    if (! emailElem.value) { 
+        showErrorAlert("Error: Debe ingresar un email");    // function from Login.js file
+        return;
+    }
+    const request = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mail: emailElem.value })
+    };
+
+    const response = await fetch("/", request);
+
 }
+
