@@ -13,7 +13,7 @@ const btnVerificationCode = document.getElementById("btnVerificationCode");
 const userNameElem = document.querySelector("#txtNewUsername");
 const passwElem = document.querySelector("#txtNewPassword");
 
-const socket = io();
+// const socket = io();
 
 addEventListener("load", () => {
     btnVerificationCode.addEventListener("click", requestVerificationCode);

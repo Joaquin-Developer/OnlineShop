@@ -14,34 +14,31 @@ btnLogin.addEventListener("click", async function(event) {
             password: inputPassword.value
         }
         try {
-            const request = {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+            let response = await fetch("http://127.0.0.1:54927/user_autentication", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
-            };
-
-            // fetch("")
-            //     .then()
-            //     .catch();
-
-
-            let response = await fetch("/login-autentication", request);
+            });
 
             if (response.ok) {
-                // show html ...
+                let loginStatus = await response.json();
 
-                // programar ...
+                if (loginStatus.status) {
+                    console.log("login correcto");
+                } else {
+                    console.log("login incorrecto");
+                }
 
-                console.log("ok");
+                if (confirm("¿Desea mantener la sesión iniciada?")) {
+                    sessionStorage.setItem("user-name", data.username);
+                }
             } else {
                 showErrorAlert(response.statusText);                
                 throw new Error(response.statusText);
             }
 
         } catch (error) {
-            console.error("Error: " + error);
+            console.error(error);
         }
 
     } else {

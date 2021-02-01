@@ -1,5 +1,5 @@
 const { response } = require("express");
-
+const database = require("../controllers/DatabaseQueries");
 const router = require("express").Router();
 
 // routes:
@@ -10,22 +10,18 @@ router.get("/", function(request, response) {
 });
 
 router.get("/login", function(req, res) {
+    // get html/css/js login
     res.render("login.html", { title: "Login - Online Shop v1.0" });
 });
 
-router.post("/login-autentication", function(req, res) {
-    // example
-    res.status(500).send("ERROR DE LOGIN");
-    // res.send("ok");
-
-});
+router.post("/login_autentication", database.login);
 
 router.post("/request-code-verification", (req, res) => {
     
-    // if (searchMailInArray(req.body.mail)) {
-    //     res.json({ status: false });
+    if (searchMailInArray(req.body.mail)) {
+        res.json({ status: false });
 
-    // } else {
+    } else {
         // mail not missing in array:
         const code = createVerificationCode();
         allCodes.push({
@@ -33,12 +29,18 @@ router.post("/request-code-verification", (req, res) => {
             mail: req.body.mail,
         });
         res.json({ status: true, mail: mail, code: code });
-    // }
-    // test:
-    
+    }
 
 });
 
+
+
+// router.post("loginautentication", )
+
+// invalid routes:
+// router.get("*", function(req, res) {
+//     res.status(404).send("<h1>404 - Not Found</h1><hr><p>Ruta inválida</p>");
+// });
 
 // Verification-code LOGINC:
 
